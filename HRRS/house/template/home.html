@@ -1,0 +1,398 @@
+{%load static %}
+<!DOCTYPE>
+<html>
+  <head>
+   
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+<!-- static nebar link-->
+{%load static %}
+<link rel="stylesheet" href="{% static 'css/style.css'%}">
+<link rel="stylesheet" href="{% static 'css/base.css'%}">
+
+<!--main.js for js folder-->
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+<!-- Fontawesome Links icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    
+<!--Fontawesome link for text-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500&display=swap" rel="stylesheet">
+
+<!--Autocomplete link-->
+<link rel="stylesheet" href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"/>
+
+
+<!-- jQuery for auto search last -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<!-- jQuery UI for auto search last-->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+ <title>House </title>
+
+</head>
+<body>
+
+<!--nav wrap and menu-, header body-->
+<div class="container">        
+    <div class="nav-wrap">
+        <div class="logo">
+           <h1><i class="fas fa-home"></i>HOME</h1>     
+        </div>
+    <div class="menu">
+       <ul>
+        <li>
+          <button type="submit" class="btn btn-danger btn-md"> <a href="{% url 'fillupform' %}">Add Your House Details</a></button>
+       <button type="submit" class="btn btn-danger btn-md"> <a href="{% url 'ownersignup' %}">Sign Up</a></button>
+       <button type="submit" class="btn btn-danger btn-md"> <a href="{% url 'ownerlogin' %}">Log In</a></button>
+        </li>
+      </ul>
+    </div>
+              
+ </div>
+</div>
+<!--nav wrap and menu-, header body end-->
+<!--image slider/carosel-->
+
+<section class="content">
+  <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-inner">
+          <div class="carousel-item active">
+              <img src="{% static 'image/backgroundimg.jpg' %}"  class="d-block w-100" style="height:400px;" alt="...">
+              <div class="carousel-caption d-none d-md-block">   
+                <h1 class="color1">Hom<span class="color">E</span></h1>
+                <span class="after"></span>      
+                <h2 style="color:white;"><b>Search Faster, Better & Smarter</b></h2>
+              </div>
+         </div>
+          <div class="carousel-item">
+              <img src="{% static 'image/home2.jpg' %}" class="d-block w-100 " style="height:400px;" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h1 class="color1">Hom<span class="color">E</span></h1>
+                <span class="after"></span> 
+                <h2 style="color:white;"><b>Find Results from Multiple Sources</b></h2>
+              </div>
+          </div>
+          <div class="carousel-item">
+              <img src="{% static 'image/house.jpg' %}" class="d-block w-100" style="height:400px;" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h1 class="color1">Hom<span class="color">E</span></h1>
+                <span class="after"></span> 
+                <h2 style="color:white;"><b>Easy Acces To Information</b></h2>
+              </div>
+          </div>
+          
+          <div class="carousel-item">
+              <img src="{% static 'image/duplex.jpg' %}" class="d-block w-100" style="height:400px;" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h1 class="color1">Hom<span class="color">E</span></h1>
+                <span class="after"></span> 
+                <h2 style="color:white;"><b>Fast and trusted</b></h2>
+              </div>
+          </div>
+          <div class="carousel-item">
+              <img src="{% static 'image/home.jpg' %}" class="d-block w-100" style="height:400px;" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h1 class="color1">Hom<span class="color">E</span></h1>
+                <span class="after"></span> 
+                <h2 style="color:white;"><b>Safe and Secure</b></h2>
+              </div>
+          </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+              data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+              data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+      </button>
+  </div>
+</section>
+</div>
+<!--end slider-->
+<!--here auto search for after login user search and see with details-->
+<section>
+    <div class="container">
+    <!--header-body-->
+      <div class="header-body">           
+        <div class="header-contain">
+          <p>You should enter area name properly</p>      
+        <!--form for auto search-->
+        <form action="/details/" method="post">
+          {% csrf_token %}
+  
+        <div class="row">
+        <div class="col">
+        <label for="code"><h3 class="text-white">Enter Your Place</h3></label>
+  
+          <input id="query" name="query" type="text" class="form-control" placeholder="Enter Place">       
+  
+        </div>
+        </div>
+  
+        <button type="submit" class="btn btn-danger btn-lg mt-3">
+          <i class="fa fa-search"></i>
+          Search Your Place</button>
+       </form>
+    <!--end form-->
+       </div>
+
+      </div>
+    </div>
+</section>  
+<!--end search-->
+
+<!--search by select-->
+<!--sir say work done..search by house rent,bedroom and other data search by user.
+  we use showhouse page for this search option-->
+  
+  <section class="container my-5 d-flex justify-content-center bgcolor">
+   <div> 
+    <p class="feature"><b>Search Your Preferable Types</b></p>
+  
+        <form action="/alldetails/" method="get" class="d-flex flex-column justify-content-around my-2">
+            {% csrf_token %}
+  
+            <div class="row">
+              <div class="col">
+  
+            <input id="query" name="query" type="text" class="form-control border border-primary shadow rounded" style="width: 500px" 
+                   placeholder="Where do you wanna go?"><br>
+  
+            <input id="min_price" name="min_price" type="number" class="form-control border border-primary shadow rounded" style="width: 500px" 
+                   placeholder="Minimum price"><br>
+  
+            <input id="max_price" name="max_price" type="number" class="form-control border border-primary shadow rounded" style="width: 500px" 
+                   placeholder="Maximum price"><br>
+  
+            <input id="min_room" name="min_room" type="number" class="form-control border border-primary shadow rounded" style="width: 500px" 
+                   placeholder="Minimum bedroom"><br>
+  
+            <input id="max_room" name="max_room" type="number" class="form-control border border-primary shadow rounded" style="width: 500px" 
+                   placeholder="Maximum bedroom"><br>
+  
+            <input id="min_bed" name="min_bed" type="number" class="form-control border border-primary shadow rounded" style="width: 500px" 
+                   placeholder="Minimum bathroom"><br>
+  
+            <input id="max_bed" name="max_bed" type="number" class="form-control border border-primary shadow rounded" style="width: 500px" 
+                   placeholder="Maximum bathroom"><br>
+  
+                </div>
+            </div>
+          
+  
+            <button type="submit" class="btn btn-secondary btn-lg mt-3"><i class="fas fa-search"></i>
+              Search</button>
+        </form>
+    </div>  
+</section>
+<!--end sir work for showhouse page-->
+<!--end-->
+
+<!--our 8 division image-->
+<!--Collage Area-->
+ <div class="bgcolor">
+
+    <h1 class="feature"><i class="fas fa-flag"></i><b>Create for Our Country</b></h1>
+     <section class="container my-5">
+      <div class="row row-cols-1 row-cols-md-4 g-4">
+          <div class="col">
+              <div class="card parent">
+                  <img style="height: 300px" src="{% static 'image/dhaka.jpg' %}"
+                       class="card-img-top"
+                       alt="...">
+                  <h2 class="card-title text-success fw-bold child">Dhaka</h2>
+    
+              </div>
+          </div>
+          <div class="col">
+              <div class="card parent">
+                  <img style="height: 300px" src="{% static 'image/chittagong.jpg' %}" class="card-img-top"
+                       alt="...">
+                  <h2 class="card-title child">Chittagong</h2>
+    
+              </div>
+          </div>
+          <div class="col">
+              <div class="card parent">
+                  <img style="height: 300px" src="{% static 'image/sylhet.jpg' %}" class="card-img-top"
+                       alt="...">
+                  <h2 class="card-title child">Sylhet</h2>
+    
+              </div>
+          </div>
+          <div class="col">
+              <div class="card parent">
+                  <img style="height: 300px" src="{% static 'image/rajshahi.jpg' %}" class="card-img-top"
+                       alt="...">
+                  <h2 class="card-title child">Rajshahi</h2>
+    
+              </div>
+          </div>
+          <div class="col">
+              <div class="card parent">
+                  <img style="height: 300px" src="{% static 'image/khulna.jpg' %}" class="card-img-top"
+                       alt="...">
+                  <h2 class="card-title child">Khulna</h2>
+    
+              </div>
+          </div>
+          <div class="col">
+              <div class="card parent">
+                  <img style="height: 300px" src="{% static 'image/rangpur.jpg' %}" class="card-img-top"
+                       alt="...">
+                  <h2 class="card-title text-dark fw-bold child">Rangpur</h2>
+    
+              </div>
+          </div>
+          <div class="col">
+              <div class="card parent">
+                  <img style="height: 300px" src="{% static 'image/mymen.jpg' %}"
+                       class="card-img-top" alt="...">
+                  <h2 class="card-title fw-bolder child text-dark">Mymensingh</h2>
+    
+              </div>
+          </div>
+          <div class="col">
+              <div class="card parent">
+                  <img style="height: 300px" src="{% static 'image/barishal.jpg' %}"
+                       class="card-img-top" alt="...">
+                  <h2 class="card-title child text-danger fw-bold">Barishal</h2>
+    
+              </div>
+          </div>
+      </div>
+    </section>
+    
+    </div>
+<!--end division image-->
+
+
+<!--our features-->
+
+<h1 class="feature"><b>Our features</b></h1>
+
+<!--part1-->
+<div class="bgcolor">
+
+<section class="container bg-light my-4 py-4">
+<div class="row" >
+    <div class="col-6 ">
+    <div class="card border-3 border-light ">
+    <div class="card-body">
+    <img src="{% static 'image/duplex.jpg' %}" width="400px" height="150px" class="rounded">   
+    </div>
+    </div>
+    </div>
+
+    <div class="col">
+    <div class="card border-3 border-secondary">
+    <div class="card-body" >
+    <h3>Flat and Duplex house can search in our web application.</h3>
+    </div>
+    </div>
+    </div>
+</section>
+
+<!--part2-->
+<section class="container bg-light my-4 py-4">
+    <div class="row">
+    <div class="col-6 ">
+    <div class="card border-3 border-secondary">
+    <div class="card-body ">
+    <h3>Family and Commercial house can search in our web application.</h3>
+
+    </div>
+    </div>
+    </div>
+
+    <div class="col ">
+    <div class="card border-3 border-light ">
+    <div class="card-body ">
+
+    <img src="{% static 'image/commercial.jpg' %}" width="400px" height="150px" class="rounded">
+      
+    </div>
+    </div>
+    </div>
+</div>
+</section>
+
+<!--part6-->
+<section class="container bg-light my-4 py-4">
+<div class="row">
+<div class="col-6 ">
+<div class="card border-3 border-light">
+<div class="card-body ">
+    
+      <img src="{% static 'image/map.png' %}" width="520px" height="300px" >
+   
+    </div>
+    </div>
+    </div>
+
+    <div class="col">
+    <div class="card border-secondary">
+    <div class="card-body" >
+  
+    <h3>User can add ratings, reviews in houses and user can see google api map
+      in our web application.
+    </h3>
+    </div>
+    </div>
+    </div>
+</section>
+
+
+
+<!--footer-->
+<footer class="bg-dark mt-5" style="height: 100px">
+    <div class="d-flex justify-content-evenly align-items-center py-5">
+        <a class="text-white fs-3 foot_a" href="https://www.facebook.com/?ref=tn_tnmn">About us</a>
+        <a class="text-white fs-3 foot_a" href="https://www.facebook.com/?ref=tn_tnmn">Contact us</a>
+        <a class="text-white fs-3 foot_a" href="https://www.facebook.com/?ref=tn_tnmn">xyz@gmail.com</a>
+    </div>
+  
+</footer>
+<!--end-->
+<!--end footer-->
+
+<!--Jquery UI for auto search.house+dhaka also create this-->
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+ <!--Autocomplete use extra-->
+ <script>
+    $(function() {
+    $("#query").autocomplete({
+      source: "/auto_house/",
+      select: function (event, ui) { //item selected
+        AutoCompleteSelectHandler(event, ui)
+      },
+    });
+  });
+
+  function AutoCompleteSelectHandler(event, ui)
+  {
+      const selectedObj = ui.item;
+  }
+</script>
+<!--end auto search-->
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+     <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    
+    <!--Autocomplete javascript Link-->
+    <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+  </body>
+</html>

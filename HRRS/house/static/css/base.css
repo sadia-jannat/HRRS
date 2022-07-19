@@ -1,0 +1,84 @@
+.rate>input {
+    display: none;
+}
+
+.rate {
+    display: inline-block;
+    border: 0;
+}
+
+.rate>label {
+    float: right;
+}
+
+.rate>label:before {
+    display: inline-block;
+    font-size: 1.1rem;
+    font-family: FontAwesome;
+    content: "\f005";
+    margin: 0;
+    padding: 0.3rem .2rem;
+    cursor: pointer;
+}
+
+.rate .half:before {
+    content: "\f089";
+    position: absolute;
+    padding-right: 0;
+}
+
+input:checked~label,
+label:hover~label {
+    color: #ffb503;
+}
+
+input:checked+label:hover,
+input:checked~label:hover,
+input:checked~label:hover~label,
+label:hover~input:checked~label {
+    color: #cc9000;
+}
+
+.rating-star i {
+    color: #ffb503 !important;
+}
+
+#main-title {
+    color: #fff;
+}
+
+.back {
+    background-color: #92a8d1;
+}
+
+.card {
+    -webkit-box-shadow: 5px 5px 20px 5px rgba(51, 31, 4, 0.99);
+    box-shadow: 5px 5px 20px 5px rgba(51, 31, 4, 0.99);
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+}
+
+.image-responsive {
+    height: 300px;
+}
+
+.card-title:hover {
+    color: blue;
+}
+
+.category-image {
+    overflow: hidden;
+}
+
+.category-image img {
+    transition: all 1.5s ease;
+}
+
+.category-image:hover img {
+    transform: scale(1.5);
+}
