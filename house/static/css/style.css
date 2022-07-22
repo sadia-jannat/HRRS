@@ -1,0 +1,60 @@
+ * {
+     font-family: 'Bebas Neue', cursive;
+     font-family: 'Oswald', sans-serif;
+ }
+ 
+ .bgcolor {
+     background-color: f5f5f5;
+ }
+ 
+ .feature {
+     background-color: #0D6934;
+     font-size: 30px;
+     text-align: center;
+ }
+ 
+ .container>.nav-wrap {
+     display: flex;
+     justify-content: space-between;
+     color: #63110a;
+ }
+ 
+ .menu ul {
+     display: flex;
+     align-items: center;
+ }
+ 
+ .nav-wrap a {
+     color: white;
+     text-decoration: none;
+     transition: 0.5s;
+ }
+ 
+ .nav-wrap a:hover {
+     color: rgb(236, 233, 31);
+     text-decoration: none;
+ }
+ 
+ .nav-wrap ul li {
+     list-style-type: none;
+     padding: 0px 10px;
+     align-items: center;
+     font-size: 20px;
+ }
+ 
+ .logo i {
+     color: #63110a;
+     font-size: 40px;
+ }
+ 
+ .color {
+     color: #63110a;
+ }
+ 
+ .color1 {
+     color: white;
+ }
+ 
+ .back {
+     background-color: #CCCCCC;
+ }

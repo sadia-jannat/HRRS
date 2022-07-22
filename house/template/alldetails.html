@@ -1,0 +1,267 @@
+{%load static %}
+<!DOCTYPE>
+<html>
+  <head>
+   
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+<!-- static nebar link-->
+{%load static %}
+<link rel="stylesheet" href="{% static 'css/style.css'%}">
+<link rel="stylesheet" href="{% static 'css/base.css'%}">
+
+<!--main.js for js folder-->
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+<!-- Fontawesome Links icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    
+<!--Fontawesome link for text-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500&display=swap" rel="stylesheet">
+
+<!--Autocomplete link-->
+<link rel="stylesheet" href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"/>
+
+
+<!-- jQuery for auto search last -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<!-- jQuery UI for auto search last-->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+ <title>House </title>
+
+ <style>
+    .card{
+      margin:0 auto;
+      display:grid;
+    grid-template-columns:repeat(3,1fr);
+    }
+</style>
+
+</head>
+<body class="back">
+<!--nav wrap and menu-, header body-->
+<div class="container">
+            
+    <div class="nav-wrap">
+        <div class="logo">
+         <h1><i class="fas fa-home"></i>HOME</h1>         
+        </div>
+    <div class="menu">
+       <ul>
+        <li>
+            <button style="margin:5px;" class="btn btn-success"><a style="color:white" href="/">back to Home</a></button>
+            <!--logout ok by authentications-->
+            <button type="submit" class="btn btn-danger btn-md"> <a href="{% url 'ownerlogin' %}">Log In</a></button>
+        </li>
+      </ul>
+    </div>
+              
+ </div>
+<!--end nav wrap and menu-, header body-->
+<!--flat house-->
+<div class="container">
+    <h1>Flat House</h1>
+      <div class="row"> 
+      <div class="col">  
+       
+    <div class="card mt-5">
+      {% if house_list %}
+      
+      {% for fee in house_list %}
+      
+      {% if fee.housecategory == 'flat' %}
+      
+      <div class="card-body ">
+          <div class="category-image" >
+          <img src="{{ fee.img.url }}" alt="Category image" class="image-responsive rounded" width="100%" > 
+          </div>
+          
+          <h2 class="card-title text-center border">House Name:  {{fee.housename}} </h2>
+          <h2 class="card-title text-center border">House id:  {{fee.pk}} </h2>
+      
+          {% if login_result == 0 %}
+          
+          <h3 class="card-text text-center">House Rent: {{fee.houserent}} </h3>
+               
+          <div class="d-flex justify-content-center links">
+          <a href="{% url 'homedetails' fee.pk%}" class="btn btn-primary ml-2">Details</a> <!--fee.pk use kora hoy just info page a jabar jonno-->  
+          </div>
+      
+          {% endif %}
+    
+      </div>
+    
+
+      {%endif%}
+    
+      {% endfor %}
+      
+      {%else%}
+      <p>No search record found</p> 
+      {% endif %}  
+    </div>
+
+      </div>
+      </div>
+      </div>
+    <!--end flat-->   
+    <!--duplex house-->
+    <div class="container">
+        <h1>Duplex House</h1>
+          <div class="row"> 
+          <div class="col">  
+          
+        <div class="card mt-5">
+          {% if house_list %}
+          
+          {% for fee in house_list %}
+          
+          {% if fee.housecategory == 'duplex' %}
+          
+          <div class="card-body ">
+              <div class="category-image" >
+              <img src="{{ fee.img.url }}" alt="Category image" class="image-responsive rounded" width="100%" > 
+              </div>
+              
+              <h2 class="card-title text-center border">House Name:  {{fee.housename}} </h2>
+              <h2 class="card-title text-center border">House id:  {{fee.pk}} </h2>
+          
+              {% if login_result == 0 %}
+              
+              <h3 class="card-text text-center">House Rent: {{fee.houserent}} </h3>
+                   
+              <div class="d-flex justify-content-center links">
+              <a href="{% url 'homedetails' fee.pk%}" class="btn btn-primary ml-2">Details</a> <!--fee.pk use kora hoy just info page a jabar jonno-->  
+              </div>
+          
+              {% endif %}
+        
+          </div>
+          
+          {%endif%}
+        
+          {% endfor %}
+          
+          {%else%}
+          <p>No search record found</p> 
+          {% endif %}
+        </div>  
+              
+          </div>
+          </div>
+          </div>
+        <!--end duplex-->   
+          
+    <!--commercial house-->
+    <div class="container">
+        <h1>Commercial House</h1>
+          <div class="row"> 
+          <div class="col">  
+          
+        <div class="card mt-5">
+          {% if house_list %}
+          
+          {% for fee in house_list %}
+          
+          {% if fee.housecategory == 'commercial' %} 
+          
+          <div class="card-body ">
+              <div class="category-image" >
+              <img src="{{ fee.img.url }}" alt="Category image" class="image-responsive rounded" width="100%" > 
+              </div>
+              
+              <h2 class="card-title text-center border">House Name:  {{fee.housename}} </h2>
+              <h2 class="card-title text-center border">House id:  {{fee.pk}} </h2>
+          
+              {% if login_result == 0 %}
+              
+              <h3 class="card-text text-center">House Rent: {{fee.houserent}} </h3>
+                   
+              <div class="d-flex justify-content-center links">
+              <a href="{% url 'homedetails' fee.pk%}" class="btn btn-primary ml-2">Details</a> <!--fee.pk use kora hoy just info page a jabar jonno-->  
+              </div>
+          
+              {% endif %}
+          </div>
+          
+          {%endif%}
+        
+          {% endfor %}
+          
+          {%else%}
+          <p>No search record found</p> 
+          {% endif %}  
+        </div>
+
+          </div>
+          </div>
+          </div>
+        <!--end commercial--> 
+    <!--family_house house-->
+    <div class="container">
+        <h1>family_house House</h1>
+          <div class="row"> 
+          <div class="col">  
+           
+        <div class="card mt-5">
+          {% if house_list %}
+          
+          {% for fee in house_list %}
+          
+          {% if fee.housecategory == 'family_house' %}
+          
+          <div class="card-body ">
+              <div class="category-image" >
+              <img src="{{ fee.img.url }}" alt="Category image" class="image-responsive rounded" width="100%" > 
+              </div>
+              
+              <h2 class="card-title text-center border">House Name:  {{fee.housename}} </h2>
+              <h2 class="card-title text-center border">House id:  {{fee.pk}} </h2>
+          
+              {% if login_result == 0 %}
+              
+              <h3 class="card-text text-center">House Rent: {{fee.houserent}} </h3>
+                   
+              <div class="d-flex justify-content-center links">
+              <a href="{% url 'homedetails' fee.pk%}" class="btn btn-primary ml-2">Details</a> <!--fee.pk use kora hoy just info page a jabar jonno-->  
+              </div>
+          
+              {% endif %}
+        
+          </div>
+         
+          {%endif%}
+        
+          {% endfor %}
+          
+          {%else%}
+          <p>No search record found</p> 
+          {% endif %}
+        </div>  
+              
+          </div>
+          </div>
+          </div>
+    <!--end family_house-->   
+          
+                    
+          
+              
+    
+    
+     <!-- Optional JavaScript; choose one of the two! -->
+        <!-- Option 1: Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+         <!-- Option 2: Separate Popper and Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+        
+        <!--Autocomplete javascript Link-->
+        <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+      </body>
+    </html>    

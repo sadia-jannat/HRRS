@@ -1,0 +1,339 @@
+{%load static %}
+<!DOCTYPE>
+<html>
+  <head>
+   
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+<!-- static nebar link-->
+{%load static %}
+<link rel="stylesheet" href="{% static 'css/style.css'%}">
+<link rel="stylesheet" href="{% static 'css/base.css'%}">
+
+<!--main.js for js folder-->
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+<!-- Fontawesome Links icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    
+<!--Fontawesome link for text-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500&display=swap" rel="stylesheet">
+
+<!--Autocomplete link-->
+<link rel="stylesheet" href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"/>
+
+
+<!-- jQuery for auto search last -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<!-- jQuery UI for auto search last-->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+ <title>House </title>
+ <style>
+  .card{
+    margin:0 auto;
+    display:grid;
+  grid-template-columns:repeat(3,1fr);
+  }
+ </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">         
+            <div class="col-sm-4 shadow">
+             <h1>House Image</h1>
+
+            <img src="{{ fe.img.url }}"  alt="Category image" class="rounded" width="100%" height="200px"> 
+            
+            </div>    
+            <div class="col-sm-8 shadow">       
+              <h1>House Details</h1>
+              <table class="table table-hover">           
+                <tbody>
+                  <tr>
+                    <td>House Name:</td>
+                    <td>{{fe.housename}}</td>            
+                  </tr>
+        
+                  <tr>
+                    <td>House Category:</td>
+                    <td>{{fe.housecategory}}</td>           
+                  </tr>
+        
+                  <tr>
+                    <td>House Rent:</td>
+                    <td>{{fe.houserent}}</td>            
+                  </tr>
+        
+                  <tr>
+                    <td>House Size:</td>
+                    <td>{{fe.housesize}}</td>            
+                  </tr>
+        
+                  
+        
+                  <tr>
+                    <td>Division:</td>
+                    <td>{{fe.division}}</td>            
+                  </tr>
+        
+                  <tr>
+                    <td>District:</td>
+                    <td>{{fe.district}}</td>            
+                  </tr>
+        
+                  <tr>
+                    <td>House Area:</td>
+                    <td>{{fe.area}}</td>            
+                  </tr>
+        
+                  <tr>
+                    <td>Total Bedroom:</td>
+                    <td>{{fe.bedroom}}</td>            
+                  </tr>
+        
+                  <tr>
+                    <td>Dinning:</td>
+                    <td>{{fe.dinning}}</td>            
+                  </tr>
+        
+                  <tr>
+                    <td>Drawing:</td>
+                    <td>{{fe.drawing}}</td>            
+                  </tr>
+        
+                  <tr>
+                    <td>Kitchen:</td>
+                    <td>{{fe.kitchen}}</td>            
+                  </tr>
+        
+                  <tr>
+                    <td>Total Balcony:</td>
+                    <td>{{fe.balcony}}</td>            
+                  </tr>
+        
+                  <tr>
+                    <td>Total Bathroom:</td>
+                    <td>{{fe.bathroom}}</td>            
+                  </tr>
+        
+                  <tr>
+                    <td>House Details:</td>
+                    <td>{{fe.allinfo}}</td>            
+                  </tr>
+        
+                </tbody>
+              </table>
+              
+            </div>                    
+        </div>
+        
+ <!--ata holo dhaka page a jaoa..easy.ok-->
+ <div class="row-lg shadow text-center">
+    <button type="button" class="btn btn-dark btn-lg">
+      <a style="color:white" href="{% url 'details' %}">Back to Previous Page</a>
+    </button>
+</div>  
+</div>
+<br><br>
+<!--end -->
+
+<!--start review, rating, average rating fetch ,all rating fetch-->
+<section>
+    <div class="container">
+      <div class="row">    
+        <div class="col shadow">
+<!--try by houserate model rating and review-->
+<!-- Product Review -->
+<!--start Reviews -->    
+<!-- review and rating text-->    
+<div class="part text-center">   
+<h2><i class="fa-solid fa-crown"></i> 
+Add Rating and Review</h2>
+</div>
+    
+<!-- Reviews start-->  
+    <div class="col-md-6">
+      <h3 class="my-3"> Average rating -<span class="avg-rate">{{avg_reviewfetch.avg_rate}}</span> /5 <i class="fa fa-star text-warning"></i>  <!--average ar work by views info thyk-->
+    
+        {% if canAdd %}                                                       <!--koyta rate add korse check-->
+        <button data-toggle="modal" data-target="#houserate" type="button" class="btn btn-primary btn-md float-right reviewBtn">Add Review</button>
+        {% endif %}
+       
+    <!-- Modal -->
+    <div class="modal fade" id="houserate" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Review and Rating add</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+    
+            <form method="post" action="{% url 'save' fe.id %}" id="addForm">  <!--id=(addForm)ata asse custom.js id thyk and (fe.id) means houseformfill thyk j primary key nea hoise seta k bujay-->
+              {% csrf_token %}
+    
+            <table class="table table-bordered">
+    
+            {{ratevariable.as_table}}
+    
+            <tr>
+              <td colspan="2">
+                <button type="submit" class="btn btn-primary">Submit</button> 
+
+                <input type="reset" value="Reset" id="reset" class="btn btn-success" />             
+    
+              </td> 
+            </tr>    
+            </table>
+    
+            <p class="ajaxRes"></p>
+    
+    </form>
+    </div>
+          
+</div>
+</div>
+</div>
+<!--end modal-->
+</h3>
+    
+<div class="card">
+<div class="card-body review-list" style="max-height: 400px; overflow: auto;">
+<!-- Detail -->
+    
+          {% if reviewfetch %}                                   <!--no reviews add ar text-->
+    
+          {% for reviewfetchok in reviewfetch %}                 <!--review fetch kore dekha page a-->
+          
+            <blockquote class="blockquote text-right">
+              <h3> {{reviewfetchok.info_review}} </h3>
+              
+              <footer class="blockquote-footer">
+                <cite title="Source Title">                           <!--site title ata kinto javascript a cite lakha hoy-->
+    
+                  {% for star in reviewfetchok.info_rate|ljust:reviewfetchok.info_rate %}
+                 
+                  <i class="fa fa-star text-warning"></i>
+    
+                  {% endfor %}
+                
+                </cite>
+              </footer>
+            </blockquote>
+            <hr />
+    
+            {% endfor %}                          <!--end for loop-->
+    
+            {% else %}
+    
+            <p class="no-data">Add First Review</p>
+    
+            {% endif %}                             <!--end if loop-->
+                     
+        </div>
+      </div>
+    </div>
+
+    </div>
+    
+</div>
+    
+</div>
+</div>  
+</section>   
+<!--end review, rating, average rating fetch ,all rating fetch-->
+<!--map ar jonno-->
+<section class="mt-5"> 
+<!-- map ar text add-->  
+<div class="part text-center">
+        <h2><i class="fa-solid fa-crown"></i> 
+        See Google Map</h2>  
+    </div>
+  
+  <div class="container">
+    <div class="row">
+
+    <div class="col shadow">             
+    <div class="nav-wrap">
+        <div class="logo">
+           <h1><i class="fa-solid fa-map-location-dot"></i>Google Map for Area Search</h1>
+        </div>
+    <div class="menu">
+       <ul>
+        <li>
+       <button type="submit" class="btn btn-danger btn-lg"> <a href="{% url 'ourcountry' %}">Search Google Map</a></button>
+        </li>
+        </ul>
+    </div>
+              
+  </div>
+  </div>
+  </div>  
+  </section>
+  <!--end map work-->  
+  <!--try success to fetch rating reviews objects===details..ok-..but not need-->
+  
+<!--start recommendation system-->
+<section class="mt-5">
+    <!-- recommandation text-->  
+<div class="part text-center">
+  <h2><i class="fa-solid fa-crown"></i> 
+        Recommended Houses For Your Choice</h2>  
+</div>  
+  <!--recommandation backend work-->
+  <div class="container">
+    <div class="row"> 
+    <div class="col">  
+
+      <div class="card mt-5">        
+        {% if house_list %}
+    
+        {% for home in house_list %}
+      
+      <div class="card-body ">
+        
+          <div class="category-image" >  <!--dd holo houserate ar key, infor_id holo ownerformfill ar foregn key and baki variable ownerformfill model ar variable..then success it-->
+          <img src="{{ home.img.url }}" alt="Category image" class="image-responsive rounded" width="100%" > 
+          </div>
+          
+          <h3 class="card-title text-center border">House Name:  {{home.housename}} </h3>
+          <h3 class="card-title text-center border">House Division:  {{home.division}} </h3>
+          <h3 class="card-title text-center border">House area:  {{home.area}} </h3>
+          <h3 class="card-text text-center">House Rent: {{home.houserent}} </h3>
+        
+          <div class="d-flex justify-content-center links">           
+           <a href="{% url 'recommandation_details' home.pk%}" class="btn btn-primary ml-2">Details</a> <!--fee.pk use kora hoy just info page a jabar jonno-->           
+          </div>
+          
+      </div>
+           
+      {% endfor %}
+    
+      {% endif %}
+    </div>
+             
+</div>
+</div>
+</div>       
+</section>
+<!--end main recommandation work-->
+        
+  
+ <!-- Optional JavaScript; choose one of the two! -->
+        <!-- Option 1: Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+         <!-- Option 2: Separate Popper and Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+        
+        <!--Autocomplete javascript Link-->
+        <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+      </body>
+    </html>            

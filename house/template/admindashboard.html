@@ -1,0 +1,146 @@
+{%load static %}
+<!DOCTYPE>
+<html>
+  <head>
+   
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+<!-- static nebar link-->
+{%load static %}
+<link rel="stylesheet" href="{% static 'css/style.css'%}">
+<link rel="stylesheet" href="{% static 'css/base.css'%}">
+
+<!--main.js for js folder-->
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+<!-- Fontawesome Links icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    
+<!--Fontawesome link for text-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500&display=swap" rel="stylesheet">
+
+<!--Autocomplete link-->
+<link rel="stylesheet" href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"/>
+
+
+<!-- jQuery for auto search last -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<!-- jQuery UI for auto search last-->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+ <title>House </title>
+
+</head>
+<body>
+
+<h1 class="feature">Admin dashbord</h1>
+<div class="content">
+{% if formfetch %}
+
+<table class="table table-bordered table-striped ">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+
+        <th scope="col">House Image</th>
+        <th scope="col">Person Image</th>
+        <th scope="col">NID Image</th>
+
+        <th scope="col">House Category</th>
+        <th scope="col">House Name</th>
+        <th scope="col">House Rent</th>
+        <th scope="col">Division</th>
+        <th scope="col">District</th>
+        <th scope="col">Area</th>
+
+        <th scope="col">Bedroom</th>
+        <th scope="col">Bathroom</th>
+        <th scope="col">Dinning room</th>
+        <th scope="col">Drawing room</th>
+        <th scope="col">Kitchen</th>
+        <th scope="col">Belcony</th>
+        <th scope="col">Detail of house</th>
+
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+        {% for f in formfetch%}
+
+      <tr>
+        <th scope="row">{{f.id}}</th>
+        <td>{{f.ownername}}</td>
+        <td>{{f.email}}</td>
+        <td>{{f.phn}}</td>
+
+        <td>
+            <img style="height:100px" src="{{ f.img.url }}" alt="Category image" class="image-responsive mx-auto" width="100px" height="30%">
+        </td>
+        <td>
+          <img style="height:100px" src="{{ f.imgidfont.url }}" alt="Category image" class="image-responsive" width="100px">
+       </td>
+       <td>
+        <img style="height:100px" src="{{ f.imgidback.url }}" alt="Category image" class="image-responsive" width="100px">
+      </td>
+
+      <td>{{f.housecategory}}</td>
+      <td>{{f.housename}}</td>
+      <td>{{f.houserent}}</td>
+      <td>{{f.division}}</td>
+      <td>{{f.district}}</td>
+      <td>{{f.area}}</td>
+      <td>{{f.bedroom}}</td>
+      <td>{{f.bathroom}}</td>
+      <td>{{f.dinning}}</td>
+      <td>{{f.drawing}}</td>
+      <td>{{f.kitchen}}</td>
+      <td>{{f.balcony}}</td>
+      <td>{{f.allinfo}}</td>
+
+      <td>
+        <a href="{% url 'admindashbord_edit' f.id %}">Edit</a>    <!--edit ar jonno-->
+      
+    </td>
+    <td>
+
+      <form action="{% url 'admindashbord_delete' f.id %}" method="post">
+          {% csrf_token %}
+          <input type="submit" value="Delete">
+      </form>
+
+  </td>
+</tr>
+     
+{%endfor%}
+
+</tbody>
+</table>
+
+{%endif%}
+<!--end-->
+</div>
+
+
+
+
+<!-- Optional JavaScript; choose one of the two! -->
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+     <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    
+    <!--Autocomplete javascript Link-->
+    <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+  </body>
+</html>    
